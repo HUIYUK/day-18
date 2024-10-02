@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8">
+<style type="text/css">
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Brick Game</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        canvas {
+            background: #fff;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="firstcanvas" width="500" height="300"></canvas>
+    <script>
+        const canvas = document.getElementById("firstcanvas");
+        const ctx = canvas.getContext("2d");
+
+        let x = canvas.width / 2;
+        let y = canvas.height - 30;
+        let dx = 2;  // horizontal speed
+        let dy = -2; // vertical speed
+        const ballRadius = 10;
+        let ballColor = getRandomColor(); // initial random ball color
+        let boardHeight = 10;
+        let boardWidth = 75;
+        let boardX = (canvas.width - boardWidth) / 2; // initial position of the board
+        let gameRunning = true; // Track game status
+
+        const brickRowCount = 3;
+        const brickColumnCount = 5;
+        const brickWidth = 70;
+        const brickHeight = 20;
+        const brickPadding = 10;
+        const brickOffsetTop = 30;
+        const brickOffsetLeft = 30;
+        let bricks = [];
+
+        // Initialize bricks
+        for (let c = 0; c < brickColumnCount; c++) {
+            bricks[c] = [];
+            for (let r = 0; r < brickRowCount; r++) {
+                bricks[c][r] = { x: 0, y: 0, status: 1 };
+            }
+        }
+
+        // Variables to track key presses for paddle movement
+        let rightPressed = false; // track right button
+        let leftPressed = false;  // track left button
+
+        // Event listeners for keydown and keyup
+        document.addEventListener("keydown", keyDownHandler, false);
+        document.addEventListener("keyup", keyUpHandler, false);
+
+        // Keydown handler
+        function keyDownHandler(e) {
+            if (e.key === "Right" || e.key === "ArrowRight") {
+                rightPressed = true;
+            } else if (e.key === "Left" || e.key === "ArrowLeft") {
+                leftPressed = true;
+            }
+        }
+
+        // Keyup handler
+        function keyUpHandler(e) {
+            if (e.key === "Right" || e.key === "ArrowRight") {
+                rightPressed = false;
+            } else if (e.key === "Left" || e.key === "ArrowLeft") {
+                leftPressed = false;
+            }
+        }
+
+        // Function to generate random color
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        // Function to draw the ball
+        function drawBall() {
+            ctx.beginPath();
+            ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
+            ctx.fillStyle = ballColor;
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        // Function to draw the paddle/board
+        function drawBoard() {
+            ctx.beginPath();
+            ctx.fillStyle = "black"; // set board fill color
+            ctx.fillRect(boardX, canvas.height - boardHeight, boardWidth, boardHeight);
+            ctx.closePath();
+        }
+
+        // Function to draw the bricks
+        function drawBricks() {
+            for (let c = 0; c < brickColumnCount; c++) {
+                for (let r = 0; r < brickRowCount; r++) {
+                    if (bricks[c][r].status == 1) {
+                        let brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
+                        let brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
+                        bricks[c][r].x = brickX;
+                        bricks[c][r].y = brickY;
+                        ctx.beginPath();
+                        ctx.rect(brickX, brickY, brickWidth, brickHeight);
+                        ctx.fillStyle = "#808080";
+                        ctx.fill();
+                        ctx.closePath();
+                    }
+                }
+            }
+        }
+
+        // Function to update and draw the game elements
+        function draw() {
+            if (!gameRunning) return; // Stop the game if it's over
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // clear canvas for the next frame
+            drawBall(); // draw the ball
+            drawBoard(); // draw the paddle/board
+            drawBricks(); // draw the bricks
+
+            // Update ball's position
+            x += dx;
+            y += dy;
+
+            // Ball bounces off the left and right walls
+            if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+                dx = -dx;
+                ballColor = getRandomColor(); // change ball color on horizontal bounce
+            }
+
+            // Ball bounces off the top
+            if (y + dy < ballRadius) {
+                dy = -dy;
+                ballColor = getRandomColor(); // change ball color on top bounce
+            }
+
+            // Ball bounces off the paddle (board) if it touches the paddle
+            if (y + dy > canvas.height - ballRadius - boardHeight && x > boardX && x < boardX + boardWidth) {
+                dy = -dy;
+                ballColor = getRandomColor(); // change ball color on paddle bounce
+            } else if (y + dy > canvas.height - ballRadius) {
+                // Ball hits the bottom and misses the paddle
+                gameRunning = false; // Stop the game
+                alert("GAME OVER");
+                return; // Exit the draw function
+            }
+
+            // Move the paddle
+            if (rightPressed && boardX < canvas.width - boardWidth) {
+                boardX += 8;
+            } else if (leftPressed && boardX > 0) {
+                boardX -= 8;
+            }
+
+            requestAnimationFrame(draw); // request next animation frame
+        }
+
+        draw(); // start the game loop
+    </script>
+</body>
+</html>
+
+<script>
+
+</script>
+</body>
+</html>
