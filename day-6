@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8" />
+    <title>Brick Game</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        canvas {
+            background: #fff;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="firstcanvas" width="500" height="300"></canvas>
+    <script>
+        const canvas = document.getElementById("firstcanvas");
+        const ctx = canvas.getContext("2d");
+
+        const fillColor = "blue";
+        const strokeColor = "rgba(0, 0, 255, 0.5)";
+
+        ctx.fillStyle = fillColor;
+        ctx.fillRect(20, 40, 50, 50);
+
+        ctx.beginPath();
+        ctx.arc(250, 150, 20, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.closePath();
+
+        ctx.strokeStyle = strokeColor;
+        ctx.strokeRect(150, 10, 100, 40); // (x, y, width, height)
+    </script>
+</body>
+</html>
