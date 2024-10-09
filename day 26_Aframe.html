@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8">
+<style type="text/css">
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>A-Frame</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script> 
+</head>
+<body>
+    <a-scene>
+        <a-box position="-1 0.5 -3" color="#4CC3D2"></a-box>
+        <a-sky color="#ECECEC"></a-sky>
+        <a-camera
+          position="0 1 4"  <!-- 初始位置 -->
+          wasd-controls="true"  <!-- 啟用 WASD 控制相機移動 -->
+          look-controls="true"  <!-- 啟用滑鼠或手勢來控制視角轉動 -->
+          cursor="fuse: false; rayOrigin: mouse;"  <!-- 設定游標為非 fuse 模式，游標由滑鼠控制 -->
+          cursor-visible="true"  <!-- 游標可見 -->
+          cursor-scale="2"  <!-- 游標放大兩倍 -->
+          cursor-opacity="0.5">  <!-- 游標透明度為 0.5 -->
+        </a-camera>
+    </a-scene>
+</body>
+</html>
+
+<script>
+
+</script>
+</body>
+</html>
