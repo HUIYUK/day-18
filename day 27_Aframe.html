@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8">
+<style type="text/css">
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>A-Frame</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script> 
+</head>
+<body>
+    <a-scene shadow="true"> <!-- 開啟全局陰影支持 -->
+        <!-- 環境光，提供基礎照明 -->
+        <a-light type="ambient" color="#ffffff" intensity="1"></a-light> <!-- 環境光強度增強 -->
+
+        <!-- 方向光，調整位置和強度，並啟用陰影 -->
+        <a-light type="directional" position="-3 5 -1" intensity="0.5" castShadow="true"></a-light> <!-- 降低方向光強度 -->
+
+        <!-- 啟用陰影效果 -->
+        <a-box position="-1 0.5 -3" color="#4CC3D2" shadow="receive: true; cast: true"></a-box>
+
+        <a-sky color="#ECECEC"></a-sky>
+        
+        <a-camera
+          position="0 1 4"
+          wasd-controls="true"
+          look-controls="true"
+          cursor="fuse: false; rayOrigin: mouse;"
+          cursor-visible="true"
+          cursor-scale="2"
+          cursor-opacity="0.5">
+        </a-camera>
+    </a-scene>
+</body>
+</html>
+
+<script>
+
+</script>
+</body>
+</html>
