@@ -1,14 +1,4 @@
 <!DOCTYPE html>
-<html lang="zh-Hant-TW">
-<head>
-<meta charset="UTF-8">
-<style type="text/css">
-
-</style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-</head>
-<body>
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -17,26 +7,22 @@
 </head>
 <body>
     <a-scene>
-        <!-- Rotating Box -->
         <a-box position="-3 0.5 -3" color="#4CC3D2"
                animation="property: rotation; to: 0 360 0; loop: true; dur: 4000">
         </a-box>
         
-        <!-- Sky -->
         <a-sky color="#ECECEC"></a-sky>
         
         <a-light type="ambient" color="#ffffff" intensity="0.5"></a-light>
         <a-light type="directional" color="#FFD700" intensity="1" position="-3 5 1"></a-light>
         
-        <!-- Rotating Torus -->
         <a-entity 
             geometry="primitive: torus; radius: 1.5; radiusTubular: 0.1" 
             position="3 1 -5" 
-            material="color: #FF6347; metalness: 0.8; roughness: 0.2"
+            material="color: #FF6347; metalness: 0; roughness: 1"
             animation="property: rotation; to: 0 360 0; loop: true; dur: 4000">
         </a-entity>
         
-        <!-- Camera -->
         <a-camera
           position="0 1 4"
           wasd-controls="true"
@@ -47,11 +33,5 @@
           cursor-opacity="0.5">
         </a-camera>
     </a-scene>
-</body>
-</html>
-
-<script>
-
-</script>
 </body>
 </html>
